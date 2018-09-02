@@ -1,6 +1,6 @@
 # Write your code here.
 
-require "pry"
+require 'pry'
 
 
 def dictionary
@@ -30,7 +30,8 @@ def word_substituter(tweet)
   end.join(" ")   # 3
 end
 
-# 1 - each word in tweet is split
+# 1 - each word in tweet string is split and forms an array element to iterate over
+  #  - each element is called 'word'
 # 2 - indexing to the dictionary key value so that word becomes the corresponding value
 # 3 - joins up all the words  IMPLICITLY and replaced words back together to reform tweet
 
@@ -40,43 +41,47 @@ end
 def bulk_tweet_shortener(tweet_array)
   tweet_array.each do |tweet|
     puts word_substituter(tweet)
-  end 
-end 
+    # each element in tweet_array is the tweet string which
+    # the  word_substituter method can work on
+  end
+end
 
 # FUNCTION 3
 
 def selective_tweet_shortener(tweet)
   tweet.split(" ").map do |phrase|      # 1
-    if phrase.length > 140 
+    if tweet.length > 140
       word_substituter(phrase)
-    elsif phrase.length <= 140
-      phrase
-    end 
+    elsif tweet.length <= 130
+      return tweet
+    else
+      return tweet
+    end
   end
-end 
-  
-# FUNCTION 4 
+end
+
+# FUNCTION 4
 
 def shortened_tweet_truncator(tweet)
   tweet.split(" ").map do |phrase|        # 1
-    if phrase.length > 140  
+    if tweet.length > 140
+      word_substituter(phrase)
+    else
+      return tweet
+    end
+  end.join(" ")[0..136] + "..."
+end
+
+=begin
+def shortened_tweet_truncator(tweet)
+  tweet.split(" ").map do |phrase|      # 1
+    if phrase.length > 140
       word_substituter(phrase)[0..140] + "..."
     else
       phrase
     end
-  end.join(" ")
-end
-
-=begin 
-def shortened_tweet_truncator(tweet)
-  tweet.split(" ").map do |phrase|      # 1
-    if phrase.length > 140 
-      word_substituter(phrase)[0..140] + "..."
-    else 
-      phrase
-    end 
   end.join(" ")   # 2
-end 
-=end 
-# 1 - need to convert tweet and break down into words 
+end
+=end
+# 1 - need to convert tweet and break down into words
 # 2 - joins up all the words  IMPLICITLY and replaced words back together to reform tweet
